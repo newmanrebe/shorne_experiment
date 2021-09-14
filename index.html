@@ -65,12 +65,7 @@ function collectId() {
     submitId.addEventListener('click', function(e) {
            e.preventDefault();
            idVal = parseInt(idInput.value);
-           if (isNaN(idVal)){
-               alert("Please enter valid ID number");
-           } else {
-               playRound();
-           }
-           
+           alert('Id:' + idVal.toString());
     });
 }
 

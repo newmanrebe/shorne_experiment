@@ -96,9 +96,11 @@ function checkGuess(guess){
   } else {
     curMoneyVal++;
     nextValue.innerHTML = `${moneyVals[curMoneyVal]}`;
+    incorrect.style.visibility = "visible";
+    ans.style.visibility = "hidden";
     setTimeout(function(){
-          incorrect.style.visibility = "visible";
-          ans.style.visibility = "hidden";
+          incorrect.style.visibility = "hidden";
+          ans.style.visibility = "visible";
        },5000); 
     
   }

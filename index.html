@@ -12,7 +12,7 @@
     <h1>Sarah Horne Experiment</h1>
      <div id="idvalue" style="display:none">
         <form class="idform">
-            <label2 for="idField" id="id">Please enter your MTurk ID</label>
+            <label2 for="idField" id="idPrompt">Please enter your MTurk ID</label>
             <input type="text" id="idField" class="idField">
             <input type="submit" id="sendToGoogle" value="Submit" class="sendToGoogle">
         </form>
@@ -52,7 +52,9 @@ const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
 const roundForm = document.getElementById("roundformwrapper");
 const idForm = document.getElementById("idvalue");
+const idInput = document.querySelector('#idField');
 const nextVal = document.querySelector('.nextMonetaryVal');
+  
 let numGuesses = 0;
 let playGame = true;
 let randomNumber = 0;
@@ -60,7 +62,6 @@ let randomNumber = 0;
 function collectId() {
     var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
     idForm.style.display = "block";
-    const idInput = document.querySelector('#idField');
     sendToGoogle.addEventListener('click', function(e) {
            e.preventDefault();
            alert("clicked");

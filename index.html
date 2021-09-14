@@ -62,6 +62,7 @@ function collectId() {
     idForm.style.display = "block";
     const idInput = document.querySelector('#idField');
     sendToGoogle.addEventListener('click', function(e) {
+           e.preventDefault();
            alert("clicked");
            idForm.style.display = "none";
            playRound();

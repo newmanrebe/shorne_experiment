@@ -46,6 +46,7 @@ const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
 const cont = document.getElementById("#cont");
 const endr = document.getElementById("#endr");
+const newRound = document.getElementById("roundformwrapper");
 let numGuesses = 0;
 let randomNumber = 0;
 
@@ -58,6 +59,12 @@ subt.addEventListener('click', function(e){
     
 cont.addEventListener('click', function(e){
     e.preventDefault();
+     randomNumber = getRandomInt();
+      document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
+      setTimeout(function(){
+          document.getElementById("number").innerHTML="";
+          ans.style.visibility = "visible";
+       },2000); 
 });
     
 endr.addEventListener('click', function(e){
@@ -81,15 +88,8 @@ function playRound() {
     if (shouldPlay()) {
       ans.style.visibility = "hidden";
       if (newRound()) {
-        const newRound = document.getElementById("roundformwrapper");
         newRound.style.display = "block";
-      }
-      randomNumber = getRandomInt();
-      document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
-      setTimeout(function(){
-          document.getElementById("number").innerHTML="";
-          ans.style.visibility = "visible";
-       },2000);  
+      } 
     } else {
       alert("Final Score: " + score.toString());
     }

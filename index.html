@@ -50,7 +50,6 @@ subt.addEventListener('click', function(e){
             const guess = parseInt(userInput.value);
             validateGuess(guess);
         });
-incorrect.style.visibility = "hidden";
 document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3>`;
 playRound();
 
@@ -59,6 +58,7 @@ function shouldPlay() {
 }
 
 function playRound() {
+    incorrect.style.visibility = "hidden";
     if (shouldPlay()) {
       randomNumber = getRandomInt();
       ans.style.visibility = "hidden";

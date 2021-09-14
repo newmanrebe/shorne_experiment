@@ -95,7 +95,7 @@ function checkGuess(guess){
        score += moneyVals[curMoneyVal];
   } else {
     curMoneyVal++;
-    nextValue.innerHTML = moneyVals[curMoneyVal];
+    nextValue.innerHTML = '{$moneyVals[curMoneyVal]}';
     setTimeout(function(){
           incorrect.style.visibility = "visible";
           ans.style.visibility = "hidden";

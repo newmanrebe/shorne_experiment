@@ -55,8 +55,6 @@ const nextVal = document.querySelector('.nextMonetaryVal');
 let numGuesses = 0;
 let playGame = true;
 let randomNumber = 0;
-    
-collectId();
 
 function collectId() {
     var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
@@ -96,7 +94,9 @@ endr.addEventListener('click', function(e){
     numGuesses = 0;
     playRound()
 });  
-
+    
+collectId();
+    
 function shouldPlay() {
   return curMoneyVal < 3;
 }

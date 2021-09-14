@@ -64,7 +64,7 @@ function collectId() {
     idForm.style.display = "block";
     submitId.addEventListener('click', function(e) {
            e.preventDefault();
-           idVal = parseInt(idInput.value());
+           idVal = parseInt(idInput.value);
            if (isNaN(idVal)){
                alert("Please enter valid ID number");
            } else {

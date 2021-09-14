@@ -48,22 +48,10 @@ function collectId() {
    const idForm = document.getElementById("idvalue");
    idForm.style.display = "block";
    const idInput = document.querySelector('#idField');
-   sendToGoogle.addEventListener('click', function(e) {
-        e.preventDefault();
-         const id = parseString(idInput.value);
-         if (id === "") {
-             alert("ID must be valid");
-         }
-         var jqxhr = $.ajax({
-            url: url,
-            method: "GET",
-            dataType: "json",
-            data: $("#idform").serializeObject()
-        }).success(
+    sendToGoogle.addEventListener('click', function(e) {
+       
            idForm.style.display = "none";
-        );
     });
-
 }
     
     

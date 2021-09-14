@@ -14,7 +14,7 @@
         <form class="idform">
             <label2 for="idField" id="idPrompt">Please enter your MTurk ID</label>
             <input type="text" id="idField" class="idField">
-            <input type="submit" id="sendToGoogle" value="Submit" class="sendToGoogle">
+            <input type="submit" id="submitId" value="Submit" class="submitId">
         </form>
     </div>
      <div id="money">
@@ -55,6 +55,7 @@ const idForm = document.getElementById("idvalue");
 const idInput = document.querySelector('#idField');
 const nextVal = document.querySelector('.nextMonetaryVal');
   
+let idVal = 0;
 let numGuesses = 0;
 let playGame = true;
 let randomNumber = 0;
@@ -62,14 +63,19 @@ let randomNumber = 0;
 function collectId() {
     var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
     idForm.style.display = "block";
-    sendToGoogle.addEventListener('click', function(e) {
+    submitId.addEventListener('click', function(e) {
            e.preventDefault();
            alert("clicked");
-           playRound();
+           idVal = parseInt(idInput.value());
+           if (isNaN(idVal)){
+               alert("Please enter valid ID number");
+           } else {
+               playRound();
+           }
+           
     });
 }
 
-document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
 subt.addEventListener('click', function(e){
             e.preventDefault();
             //Grab guess from user
@@ -81,6 +87,7 @@ cont.addEventListener('click', function(e){
     e.preventDefault();
     roundForm.style.display = "none";
     randomNumber = getRandomInt();
+    document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
     document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
     ans.style.display = "none";
     setTimeout(function(){
@@ -117,6 +124,7 @@ function playRound() {
             nextVal.innerHTML = `${moneyVals[curMoneyVal]}`;
         } else {
             randomNumber = getRandomInt();
+            document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`
             document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
             setTimeout(function(){
               document.getElementById("number").innerHTML="";
@@ -124,7 +132,7 @@ function playRound() {
             },2000);
         }
     } else {
-      alert("Final Score: " + score.toString());
+      postToGoogle();
     }
     
 }
@@ -158,9 +166,25 @@ function checkGuess(guess){
     curMoneyVal++;
   }
   userInput.value = '';
-  document.getElementById("score").innerHTML = `<h3>Money earned: ${score} cents. </h3>`
+  document.getElementById("score").innerHTML = `<h3>Money earned: ${score/100}. </h3>`
   document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
   playRound();
+}
+   
+function PostToGoogle(){
+    $.ajax({
+        url = "https://docs.google.com/spreadsheets/d/1ONz_j4es77MfOSf9DEu-4NZkDbxGFMh-qjbQlKmE-k8/edit#gid=0",
+        data: {"idField": idVal, "score": score/100},
+        type: "POST",
+        dataType: "xml",
+        success: function(d){
+           alert("Thanks for playing!");
+        },
+        error: function(x,y,z){
+            //show your error message
+            alert("Error recording response");
+       }
+    });
 }
 
 </script>

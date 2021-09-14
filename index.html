@@ -10,9 +10,6 @@
 </head>
 <body>
     <h1>Sarah Horne Experiment</h1>
-    <div id= "monetary">
-        <h2> That guess was incorrect. We will now move on to <span class="nextValue"></span></h2>
-    </div>
     </br>
     <div id="number">
     <p>number</p>
@@ -30,18 +27,27 @@
     <div id="score">
     <p> Score: </p>
     </div>
+    <div id="roundformwrapper" style="display:none">
+     <h2> In this next set you will need to answer:</h2>
+     <h2>1 time to earn <span class="nextMonetaryVal"></span> cents. </h2>
+     <h2> Press continue to participate in this round, or press skip to move on to the next reward level. </h2>
+     <form class="roundform">
+            <input type="submit" id="cont" value="Continue" class="cont">
+            <input type="submit" id="endr" value="End Round" class="endr">
+        </form>
+    </div>
 <script>
 let moneyVals = [16, 25, 50];
 let curMoneyVal = 0;
 let score = 0;
 const submit = document.querySelector('#subt');
 const userInput = document.querySelector('#guessField');
+const roundInfo = document.querySelector('.nextMonetaryVal');
 const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
-const incorect = document.getElementById("monetary");
-const nextValue = document.querySelector('.nextValue');
+const cont = document.getElementById("#cont");
+const endr = document.getElementById("#endr");
 let numGuesses = 1;
-let playGame = true;
 let randomNumber = 0;
 
 subt.addEventListener('click', function(e){
@@ -50,16 +56,36 @@ subt.addEventListener('click', function(e){
             const guess = parseInt(userInput.value);
             validateGuess(guess);
         });
-document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3>`;
+    
+cont.addEventListener('click', function(e){
+    e.preventDefault();
+});
+    
+endr.addEventListener('click', function(e){
+    e.preventDefault();
+    curMoneyVal++
+    numGuesses = 0;
+    playRound()
+});  
+document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3> cents.`;
 playRound();
 
 function shouldPlay() {
   return numGuesses < 16 && curMoneyVal < 3;
 }
+    
+function newRound() {
+  return numGuesses === 0;   
+}
 
 function playRound() {
-    incorrect.style.visibility = "hidden";
     if (shouldPlay()) {
+      if (newRound()) {
+        ans.style.visibility = "hidden";
+        const newRound = document.getElementById("roundformwrapper");
+        roundInfo.innerHTML = ` ${moneyVals[curMoneyVal]}`;
+        newRound.style.display = "block";
+      }
       randomNumber = getRandomInt();
       ans.style.visibility = "hidden";
       document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
@@ -95,18 +121,12 @@ function checkGuess(guess){
        score += moneyVals[curMoneyVal];
   } else {
     curMoneyVal++;
-    nextValue.innerHTML = `${moneyVals[curMoneyVal]}`;
-    incorrect.style.visibility = "visible";
-    ans.style.visibility = "hidden";
-    setTimeout(function(){
-          incorrect.style.visibility = "hidden";
-          ans.style.visibility = "visible";
-       },5000); 
-    
+    alert("Incorrect response");
   }
   if (numGuesses === 16) {
     numGuesses = 0;
     curMoneyVal++;
+      
   }
   userInput.value = '';
   document.getElementById("score").innerHTML = `<h3>Score: ${score}</h3>`
@@ -116,4 +136,5 @@ function checkGuess(guess){
 
 </script>
 </body>
+
 </html>

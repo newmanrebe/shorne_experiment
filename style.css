@@ -9,16 +9,6 @@ body {
     margin: 0 auto;
 }
 
-.lastResult {
-    color: white;
-    padding: 7px;
-}
-
-.guesses {
-    color: white;
-    padding: 7px;
-}
-
 button {
     background-color: purple;
     color: #fff;
@@ -71,7 +61,7 @@ button {
     box-sizing: border-box;
     text-align: center;
     width: 750px;
-    height: 550px;
+    height: 400px;
     background-color: #12aab4;
     color: #fff;
     font-size: 25px;

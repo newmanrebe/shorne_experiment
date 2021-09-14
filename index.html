@@ -51,6 +51,7 @@ const userInput = document.querySelector('#guessField');
 const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
 const roundForm = document.getElementById("roundformwrapper");
+const idForm = document.getElementById("idvalue");
 const nextVal = document.querySelector('.nextMonetaryVal');
 let numGuesses = 0;
 let playGame = true;
@@ -58,10 +59,10 @@ let randomNumber = 0;
 
 function collectId() {
     var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
-    const idForm = document.getElementById("idvalue");
     idForm.style.display = "block";
     const idInput = document.querySelector('#idField');
     sendToGoogle.addEventListener('click', function(e) {
+           alert("clicked");
            idForm.style.display = "none";
            playRound();
     });

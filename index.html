@@ -34,7 +34,7 @@
     </div>
 <script>
 
-let moneyVals = [16, 25, 50];
+let moneyVals = [10, 25, 50];
 let curMoneyVal = 0;
 let score = 0;
 const submit = document.querySelector('#subt');
@@ -61,7 +61,7 @@ cont.addEventListener('click', function(e){
     ans.style.visibility = "hidden";
     setTimeout(function(){
       document.getElementById("number").innerHTML="";
-      ans.style.display = "visible";
+      ans.style.visibility = "visible";
     },2000);
    
 });
@@ -95,7 +95,7 @@ function playRound() {
             ans.style.visibility = "hidden";
             setTimeout(function(){
               document.getElementById("number").innerHTML="";
-              ans.style.display = "visible";
+              ans.style.visibility = "visible";
             },2000);
         }
     } else {

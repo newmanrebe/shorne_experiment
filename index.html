@@ -10,6 +10,13 @@
 </head>
 <body>
     <h1>Sarah Horne Experiment</h1>
+     <div id="idvalue" style="display:none">
+        <form class="idform">
+            <label2 for="idField" id="id">Please enter your MTurk ID</label>
+            <input type="text" id="idField" class="idField">
+            <input type="submit" id="sendToGoogle" value="Submit" class="sendToGoogle">
+        </form>
+    </div>
      <div id="money">
     </div>
     <div id="score">
@@ -34,6 +41,32 @@
     </div>
 <script>
 
+collectId();
+    
+function collectId() {
+   const idForm = document.getElementById("idvalue");
+   idForm.style.display = "block";
+   const idInput = document.querySelector('#idField');
+   const subt = document.querySelector('#sendToGoogle');
+   sendToGoogle.addEventListener('click', function(e) {
+        e.preventDefault();
+         const id = parseString(idInput.value);
+         if (id === "") {
+             alert("ID must be valid");
+         }
+         var jqxhr = $.ajax({
+            url: url,
+            method: "GET",
+            dataType: "json",
+            data: $form.serializeObject()
+        }).success(
+           idForm.style.display = "none";
+        );
+    });
+
+}
+    
+    
 let moneyVals = [10, 25, 50];
 let curMoneyVal = 0;
 let score = 0;

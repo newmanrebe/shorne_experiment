@@ -12,7 +12,6 @@
     <h1>Sarah Horne Experiment</h1>
     </br>
     <div id="number">
-    <p>number</p>
     </div>
     <div id="wrapper">
         <form class="form">
@@ -83,7 +82,6 @@ function playRound() {
       ans.style.visibility = "hidden";
       if (newRound()) {
         const newRound = document.getElementById("roundformwrapper");
-        roundInfo.innerHTML = ` ${moneyVals[curMoneyVal]}`;
         newRound.style.display = "block";
       }
       randomNumber = getRandomInt();

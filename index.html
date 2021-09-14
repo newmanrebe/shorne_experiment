@@ -41,64 +41,61 @@
     </div>
 <script>
 
-collectId();
+
+
+let moneyVals = [10, 25, 50];
+let curMoneyVal = 0;
+let score = 0;
+const submit = document.querySelector('#subt');
+const userInput = document.querySelector('#guessField');
+const p = document.createElement('p');
+const ans = document.getElementById("wrapper");
+const roundForm = document.getElementById("roundformwrapper");
+const nextVal = document.querySelector('.nextMonetaryVal');
+let numGuesses = 0;
+let playGame = true;
+let randomNumber = 0;
     
+collectId();
+
 function collectId() {
-   var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
-   const idForm = document.getElementById("idvalue");
-   idForm.style.display = "block";
-   const idInput = document.querySelector('#idField');
+    var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
+    const idForm = document.getElementById("idvalue");
+    idForm.style.display = "block";
+    const idInput = document.querySelector('#idField');
     sendToGoogle.addEventListener('click', function(e) {
            idForm.style.display = "none";
-           startExperiment();
+           playRound();
     });
 }
-    
-function startExperiment() {
-    let moneyVals = [10, 25, 50];
-    let curMoneyVal = 0;
-    let score = 0;
-    const submit = document.querySelector('#subt');
-    const userInput = document.querySelector('#guessField');
-    const p = document.createElement('p');
-    const ans = document.getElementById("wrapper");
-    const roundForm = document.getElementById("roundformwrapper");
-    const nextVal = document.querySelector('.nextMonetaryVal');
-    let numGuesses = 0;
-    let playGame = true;
-    let randomNumber = 0;
 
-    document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
-    subt.addEventListener('click', function(e){
-                e.preventDefault();
-                //Grab guess from user
-                const guess = parseInt(userInput.value);
-                validateGuess(guess);
-            });
+document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
+subt.addEventListener('click', function(e){
+            e.preventDefault();
+            //Grab guess from user
+            const guess = parseInt(userInput.value);
+            validateGuess(guess);
+        });
 
-    cont.addEventListener('click', function(e){
-        e.preventDefault();
-        roundForm.style.display = "none";
-        randomNumber = getRandomInt();
-        document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
-        ans.style.display = "none";
-        setTimeout(function(){
-          document.getElementById("number").innerHTML="";
-          ans.style.display = "block";
-        },2000);
+cont.addEventListener('click', function(e){
+    e.preventDefault();
+    roundForm.style.display = "none";
+    randomNumber = getRandomInt();
+    document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
+    ans.style.display = "none";
+    setTimeout(function(){
+      document.getElementById("number").innerHTML="";
+      ans.style.display = "block";
+    },2000);
 
-    });
+});
 
-    endr.addEventListener('click', function(e){
-        e.preventDefault();
-        curMoneyVal++
-        numGuesses = 0;
-        playRound()
-    });  
-
-    playRound(); 
-}
-
+endr.addEventListener('click', function(e){
+    e.preventDefault();
+    curMoneyVal++
+    numGuesses = 0;
+    playRound()
+});  
 
 function shouldPlay() {
   return curMoneyVal < 3;

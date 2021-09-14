@@ -58,8 +58,7 @@ cont.addEventListener('click', function(e){
     e.preventDefault();
     roundForm.style.display = "none";
     randomNumber = getRandomInt();
-    ans.style.visibility = "hidden";
-     document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
+    document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
     setTimeout(function(){
       document.getElementById("number").innerHTML="";
       ans.style.visibility = "visible";

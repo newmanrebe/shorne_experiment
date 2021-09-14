@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Number guessing game</h1>
+    </br>
+    <div id="number">
+    <p>number</p>
+    </div>
+    <div id="wrapper">
+        <form class="form">
+            <label2 for="guessField" id="guess">Answer</label>
+            <input type="text" id="guessField" class="guessField">
+            <input type="submit" id="subt" value="Submit" class="guessSubmit">
+        </form>
+    </div>
+    <div id="money">
+    <p> val: </p>
+    </div>
+    <div id="score">
+    <p> Score: </p>
+    </div>
+<script>
+let moneyVals = [16, 25, 50];
+let curMoneyVal = 0;
+let score = 0;
+const submit = document.querySelector('#subt');
+const userInput = document.querySelector('#guessField');
+const p = document.createElement('p');
+const ans = document.getElementById("wrapper");
+let numGuesses = 1;
+let playGame = true;
+let randomNumber = 0;
+
+subt.addEventListener('click', function(e){
+            e.preventDefault();
+            //Grab guess from user
+            const guess = parseInt(userInput.value);
+            validateGuess(guess);
+        });
+
+document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3>`;
+playRound();
+
+function shouldPlay() {
+  return numGuesses < 16 && curMoneyVal < 3;
+}
+
+function playRound() {
+    if (shouldPlay()) {
+      randomNumber = getRandomInt();
+      ans.style.visibility = "hidden";
+      document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
+      setTimeout(function(){
+          document.getElementById("number").innerHTML="";
+          ans.style.visibility = "visible";
+       },2000);  
+    } else {
+      alert("Final Score: " + score.toString());
+    }
+    
+}
+
+function getRandomInt() {
+  return Math.floor(10 + (Math.random() * 89));
+}
+
+function reverseString(str) {
+    return str.split("").reverse().join("");
+}
+
+function validateGuess(guess){
+    if (isNaN(guess)){
+        alert('Please enter a valid number');
+    } else {
+        checkGuess(guess);
+    }
+}
+
+function checkGuess(guess){
+  if (guess.toString() === reverseString(randomNumber.toString())){
+       numGuesses++;
+       score += moneyVals[curMoneyVal];
+  } else {
+    curMoneyVal++;
+  }
+  if (numGuesses === 16) {
+    numGuesses = 0;
+    curMoneyVal++;
+  }
+  userInput.value = '';
+  document.getElementById("score").innerHTML = `<h3>Score: ${score}</h3>`
+  document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3>`;
+  playRound();
+}
+
+</script>
+</body>
+</html>

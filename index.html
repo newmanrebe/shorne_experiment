@@ -61,11 +61,9 @@ let playGame = true;
 let randomNumber = 0;
 
 function collectId() {
-    var url = "https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec";
     idForm.style.display = "block";
     submitId.addEventListener('click', function(e) {
            e.preventDefault();
-           alert("clicked");
            idVal = parseInt(idInput.value());
            if (isNaN(idVal)){
                alert("Please enter valid ID number");

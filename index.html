@@ -80,14 +80,13 @@ function newRound() {
 
 function playRound() {
     if (shouldPlay()) {
+      ans.style.visibility = "hidden";
       if (newRound()) {
-        ans.style.visibility = "hidden";
         const newRound = document.getElementById("roundformwrapper");
         roundInfo.innerHTML = ` ${moneyVals[curMoneyVal]}`;
         newRound.style.display = "block";
       }
       randomNumber = getRandomInt();
-      ans.style.visibility = "hidden";
       document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
       setTimeout(function(){
           document.getElementById("number").innerHTML="";

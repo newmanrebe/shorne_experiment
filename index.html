@@ -44,8 +44,7 @@
 collectId();
     
 function collectId() {
-    var $form = $('form#idform'),
-    url = 'https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec'
+   var url = 'https://script.google.com/macros/s/AKfycbyD0YqegRIQyh0Rec3F0qs_Qd-wkWhpaIo7sfxi77Aa3YNg3QhRH7BnOjr9UVlKojAm/exec'
    const idForm = document.getElementById("idvalue");
    idForm.style.display = "block";
    const idInput = document.querySelector('#idField');
@@ -60,7 +59,7 @@ function collectId() {
             url: url,
             method: "GET",
             dataType: "json",
-            data: $form.serializeObject()
+            data: $("#idform").serializeObject()
         }).success(
            idForm.style.display = "none";
         );

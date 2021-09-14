@@ -46,7 +46,7 @@ const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
 const cont = document.getElementById("#cont");
 const endr = document.getElementById("#endr");
-const newRound = document.getElementById("roundformwrapper");
+const newRoundText = document.getElementById("roundformwrapper");
 let numGuesses = 0;
 let randomNumber = 0;
 
@@ -59,7 +59,7 @@ subt.addEventListener('click', function(e){
     
 cont.addEventListener('click', function(e){
     e.preventDefault();
-    newRound.style.display = "none";
+    newRoundText.style.display = "none";
     randomNumber = getRandomInt();
     document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
     setTimeout(function(){
@@ -89,7 +89,7 @@ function playRound() {
     if (shouldPlay()) {
       ans.style.visibility = "hidden";
       if (newRound()) {
-        newRound.style.display = "block";
+        newRoundText.style.display = "block";
       } 
     } else {
       alert("Final Score: " + score.toString());

@@ -10,19 +10,18 @@
 </head>
 <body>
     <h1>Sarah Horne Experiment</h1>
-    </br>
+     <div id="money">
+    </div>
+    <div id="score">
+    </div>
     <div id="number">
     </div>
-    <div id="wrapper">
+    <div id="wrapper" style="display:none">
         <form class="form">
             <label2 for="guessField" id="guess">Answer</label>
             <input type="text" id="guessField" class="guessField">
             <input type="submit" id="subt" value="Submit" class="guessSubmit">
         </form>
-    </div>
-    <div id="money">
-    </div>
-    <div id="score">
     </div>
     <div id="roundformwrapper" style="display:none">
      <h2> In this next set you will need to answer:</h2>
@@ -47,6 +46,8 @@ const nextVal = document.querySelector('.nextMonetaryVal');
 let numGuesses = 0;
 let playGame = true;
 let randomNumber = 0;
+
+document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
 subt.addEventListener('click', function(e){
             e.preventDefault();
             //Grab guess from user
@@ -59,10 +60,10 @@ cont.addEventListener('click', function(e){
     roundForm.style.display = "none";
     randomNumber = getRandomInt();
     document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
-    ans.style.visibility = "hidden";
+    ans.style.display = "none";
     setTimeout(function(){
       document.getElementById("number").innerHTML="";
-      ans.style.visibility = "visible";
+      ans.style.display = "block";
     },2000);
    
 });
@@ -87,7 +88,7 @@ function newRound() {
 
 function playRound() {
     if (shouldPlay()) {
-        ans.style.visibility = "hidden";
+        ans.style.display = "none";
         if (newRound()) {
             roundForm.style.display = "block";
             nextVal.innerHTML = `${moneyVals[curMoneyVal]}`;
@@ -96,7 +97,7 @@ function playRound() {
             document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
             setTimeout(function(){
               document.getElementById("number").innerHTML="";
-              ans.style.visibility = "visible";
+              ans.style.display = "block";
             },2000);
         }
     } else {
@@ -134,8 +135,8 @@ function checkGuess(guess){
     curMoneyVal++;
   }
   userInput.value = '';
-  document.getElementById("score").innerHTML = `<h3>Score: ${score}</h3>`
-  document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3>`;
+  document.getElementById("score").innerHTML = `<h3>Money earned: ${score} cents. </h3>`
+  document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
   playRound();
 }
 

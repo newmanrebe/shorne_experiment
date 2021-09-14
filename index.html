@@ -86,7 +86,6 @@ function newRound() {
 
 function playRound() {
     if (shouldPlay()) {
-        ans.style.visibility = "hidden";
         if (newRound()) {
             roundForm.style.display = "block";
             nextVal.innerHTML = `${moneyVals[curMoneyVal]}`;

@@ -65,7 +65,7 @@ function collectId() {
     sendToGoogle.addEventListener('click', function(e) {
            e.preventDefault();
            alert("clicked");
-           idForm.style.display = "none";
+           playRound();
     });
 }
 
@@ -109,6 +109,7 @@ function newRound() {
 }
 
 function playRound() {
+    idForm.style.display = "none";
     if (shouldPlay()) {
         ans.style.display = "none";
         if (newRound()) {

@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Number guessing game</h1>
+    <h1>Sarah Horne Experiment</h1>
+    <div id= "monetary">
+        <h2> That guess was incorrect. We will now move on to <span class="nextValue"></span></h2>
+    </div>
     </br>
     <div id="number">
     <p>number</p>
@@ -35,6 +38,8 @@ const submit = document.querySelector('#subt');
 const userInput = document.querySelector('#guessField');
 const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
+const incorect = document.getElementById("monetary");
+const nextValue = document.querySelector('.nextValue');
 let numGuesses = 1;
 let playGame = true;
 let randomNumber = 0;
@@ -45,7 +50,7 @@ subt.addEventListener('click', function(e){
             const guess = parseInt(userInput.value);
             validateGuess(guess);
         });
-
+incorrect.style.visibility = "hidden";
 document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]}</h3>`;
 playRound();
 
@@ -90,6 +95,12 @@ function checkGuess(guess){
        score += moneyVals[curMoneyVal];
   } else {
     curMoneyVal++;
+    nextValue.innerHTML = moneyVals[curMoneyVal];
+    setTimeout(function(){
+          incorrect.style.visibility = "visible";
+          ans.style.visibility = "hidden";
+       },5000); 
+    
   }
   if (numGuesses === 16) {
     numGuesses = 0;

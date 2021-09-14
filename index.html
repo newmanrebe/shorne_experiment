@@ -63,8 +63,8 @@ cont.addEventListener('click', function(e){
     setTimeout(function(){
       document.getElementById("number").innerHTML="";
       ans.style.display = "visible";
-    },2000);  
-
+    },2000);
+   
 });
     
 endr.addEventListener('click', function(e){
@@ -87,11 +87,19 @@ function newRound() {
 
 function playRound() {
     if (shouldPlay()) {
+        ans.style.visibility = "hidden";
         if (newRound()) {
             roundForm.style.display = "block";
             nextVal.innerHTML = `${moneyVals[curMoneyVal]}`;
+        } else {
+            randomNumber = getRandomInt();
+            document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
+            ans.style.visibility = "hidden";
+            setTimeout(function(){
+              document.getElementById("number").innerHTML="";
+              ans.style.display = "visible";
+            },2000);
         }
-     
     } else {
       alert("Final Score: " + score.toString());
     }
@@ -120,8 +128,6 @@ function checkGuess(guess){
        score += moneyVals[curMoneyVal];
   } else {
     curMoneyVal++;
-    const test = document.getElementById("roundformwrapper");
-    test.style.display = "block";
   }
   if (numGuesses === 16) {
     numGuesses = 0;

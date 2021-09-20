@@ -1,3 +1,4 @@
+
 html {
     font-family: sans-serif;
 }
@@ -33,6 +34,62 @@ button {
     /* margin-left: 75px; */
 }
 
+#endr {
+    background-color: yellow;
+    color: #000;
+    width: 350px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 30px;
+    border-style: none;
+    margin-top: 50px;
+    /* margin-left: 75px; */
+}
+
+#cont {
+    background-color: yellow;
+    color: #000;
+    width: 350px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 30px;
+    border-style: none;
+    margin-top: 50px;
+    /* margin-left: 75px; */
+}
+
+#submitId {
+    background-color: yellow;
+    color: #000;
+    width: 350px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 30px;
+    border-style: none;
+    margin-top: 50px;
+    /* margin-left: 75px; */
+}
+
+#idField {
+    color: #000;
+    width: 550px;
+    height: 100px;
+    font-size: 30px;
+    border-style: none;
+    margin-top: 25px;
+    font-size: 45px;
+    /* margin-left: 50px; */
+    border: 5px solid #14727d;
+    text-align: center;
+}
+
+#idPrompt {
+    font-size: 55px;
+    /* margin-left: 90px; */
+    margin-top: 120px;
+    color: #fff;
+}
+
 #guessField {
     color: #000;
     width: 550px;
@@ -61,14 +118,60 @@ button {
     box-sizing: border-box;
     text-align: center;
     width: 750px;
-    height: 400px;
+    height: 300px;
     background-color: #12aab4;
     color: #fff;
     font-size: 25px;
 }
 
+#idvalue {
+    box-sizing: border-box;
+    text-align: center;
+    width: 750px;
+    height: 320px;
+    background-color: #12aab4;
+    color: #fff;
+    font-size: 25px;
+}
+
+#roundformwrapper {
+    box-sizing: border-box;
+    text-align: center;
+    width: 750px;
+    height: 320px;
+    background-color: #12aab4;
+    color: #fff;
+    font-size: 25px;
+}
+
+#endroundbutton {
+    box-sizing: border-box;
+    text-align: center;
+    width: 750px;
+    height: 110px;
+    background-color: #12aab4;
+    color: #fff;
+    font-size: 25px;
+}
+
+h4 {
+    box-sizing: border-box;
+    text-align: center;
+    width: 750px;
+    height: 70px;
+    background-color: #12aab4;
+    color: #fff;
+    font-size: 45px;
+}
+
 h1 {
     background-color: #7b3056;
+    color: #fff;
+    text-align: center;
+    width: 750px;
+}
+h2 {
+    background-color: #317b30;
     color: #fff;
     text-align: center;
     width: 750px;

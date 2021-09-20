@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@
     <h1>Sarah Horne Experiment</h1>
      <div id="idvalue" style="display:none">
         <form class="idform">
-            <label2 for="idField" id="idPrompt">Please enter your MTurk ID</label>
+            <label2 for="idField" id="idPrompt">Please enter your MTurk ID</label2>
             <input type="text" id="idField" class="idField">
             <input type="submit" id="submitId" value="Submit" class="submitId">
         </form>
@@ -31,13 +30,15 @@
         </form>
     </div>
     <div id="roundformwrapper" style="display:none">
-     <h2> In this next set you will need to answer:</h2>
-     <h2>1 time to earn <span class="nextMonetaryVal">d</span> cents. </h2>
-     <h2> Press continue to participate in this round, or press skip to move on to the next reward level. </h2>
+     <h3> In this next set you will need to answer:</h3>
+     <h3><span class ="thresholdVal"></span> times to earn <span class="nextMonetaryVal">d</span> cents. </h3>
+     <h3> Press continue to participate in this round, or press end round to move on to the next reward level. </h3>
      <form class="roundform">
             <input type="submit" id="cont" value="Continue" class="cont">
-            <input type="submit" id="endr" value="End Round" class="endr">
         </form>
+    </div>
+    <div id="endroundbutton" style="display:none">
+        <input type="submit" id="endr" value="End Round" class="endr">
     </div>
 <script>
 
@@ -46,14 +47,19 @@
 let moneyVals = [10, 25, 50];
 let curMoneyVal = 0;
 let score = 0;
+let threshold = 1;
+let guessTimeout = null;
 const submit = document.querySelector('#subt');
 const userInput = document.querySelector('#guessField');
 const p = document.createElement('p');
 const ans = document.getElementById("wrapper");
 const roundForm = document.getElementById("roundformwrapper");
+const endRoundButton = document.getElementById("endroundbutton");
 const idForm = document.getElementById("idvalue");
 const idInput = document.querySelector('#idField');
 const nextVal = document.querySelector('.nextMonetaryVal');
+const thresholdVal = document.querySelector('.thresholdVal');
+
   
 let idVal = 0;
 let numGuesses = 0;
@@ -65,12 +71,18 @@ function collectId() {
     submitId.addEventListener('click', function(e) {
            e.preventDefault();
            idVal = parseInt(idInput.value);
-           alert('Id:' + idVal.toString());
+           if (isNaN(idVal)) {
+             alert("Please enter a valid ID");
+           } else {
+              playRound();
+           }
     });
 }
 
 subt.addEventListener('click', function(e){
             e.preventDefault();
+            clearTimeout(guessTimeout);
+            guessTimeout = null;
             //Grab guess from user
             const guess = parseInt(userInput.value);
             validateGuess(guess);
@@ -78,15 +90,7 @@ subt.addEventListener('click', function(e){
 
 cont.addEventListener('click', function(e){
     e.preventDefault();
-    roundForm.style.display = "none";
-    randomNumber = getRandomInt();
-    document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
-    document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
-    ans.style.display = "none";
-    setTimeout(function(){
-      document.getElementById("number").innerHTML="";
-      ans.style.display = "block";
-    },2000);
+    gamePlay();
 
 });
 
@@ -94,7 +98,7 @@ endr.addEventListener('click', function(e){
     e.preventDefault();
     curMoneyVal++
     numGuesses = 0;
-    playRound()
+    playRound();
 });  
     
 collectId();
@@ -108,24 +112,43 @@ function newRound() {
   return numGuesses === 0;   
 }
 
+function gamePlay() {
+  roundForm.style.display = "none";
+      endroundbutton.style.display = "none";
+      randomNumber = getRandomInt();
+      document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
+      document.getElementById("number").innerHTML = "<h4>" + randomNumber + "</h4>";
+      ans.style.display = "none";
+      setTimeout(function(){
+        document.getElementById("number").innerHTML="";
+        ans.style.display = "block";
+        endroundbutton.style.display = "block";
+      },2000);
+      
+      guessTimeout = setTimeout(function(){
+        ans.style.display = "none";
+        curMoneyVal++
+    		numGuesses = 0;
+    		playRound();
+      },12000);
+      
+      
+}
+
 function playRound() {
     idForm.style.display = "none";
     if (shouldPlay()) {
         ans.style.display = "none";
+        endroundbutton.style.display = "block";
         if (newRound()) {
             roundForm.style.display = "block";
             nextVal.innerHTML = `${moneyVals[curMoneyVal]}`;
+            thresholdVal.innerHTML = `${threshold}`;
         } else {
-            randomNumber = getRandomInt();
-            document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`
-            document.getElementById("number").innerHTML = "<h1>" + randomNumber + "</h1>";
-            setTimeout(function(){
-              document.getElementById("number").innerHTML="";
-              ans.style.display = "block";
-            },2000);
+            gamePlay();
         }
     } else {
-      postToGoogle();
+      alert("all done");
     }
     
 }
@@ -154,30 +177,20 @@ function checkGuess(guess){
     curMoneyVal++;
     numGuesses = 0;
   }
-  if (numGuesses === 16) {
+  if (numGuesses === threshold) {
     numGuesses = 0;
-    curMoneyVal++;
+    if (threshold === 32) {
+  		threshold = 1;
+    	curMoneyVal++;
+  	} else {
+    	threshold *= 2;
+    }
   }
+  
   userInput.value = '';
-  document.getElementById("score").innerHTML = `<h3>Money earned: ${score/100}. </h3>`
-  document.getElementById("money").innerHTML = `<h3>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h3>`;
+  document.getElementById("score").innerHTML = `<h2>Money earned: ${score/100} </h2>`
+  document.getElementById("money").innerHTML = `<h2>Current monetary value: ${moneyVals[curMoneyVal]} cents. </h2>`;
   playRound();
-}
-   
-function PostToGoogle(){
-    $.ajax({
-        url = "https://docs.google.com/spreadsheets/d/1ONz_j4es77MfOSf9DEu-4NZkDbxGFMh-qjbQlKmE-k8/edit#gid=0",
-        data: {"idField": idVal, "score": score/100},
-        type: "POST",
-        dataType: "xml",
-        success: function(d){
-           alert('Thanks for playing!');
-        },
-        error: function(x,y,z){
-            //show your error message
-            alert('Error recording response');
-       }
-    });
 }
 
 </script>

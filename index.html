@@ -187,6 +187,7 @@ function checkGuess(guess){
     numGuesses = 0;
     if (threshold === 32) {
   		threshold = 1;
+        finalScore[curMoneyVal] = score/100
     	curMoneyVal++;
   	} else {
     	threshold *= 2;

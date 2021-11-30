@@ -37,8 +37,11 @@
             <input type="submit" id="cont" value="Continue" class="cont">
         </form>
     </div>
-    <div id="endroundbutton" style="display:none">
-        <input type="submit" id="endr" value="End Round" class="endr">
+    <div id="endroundbutton">
+        <form name="submit-to-google-sheet">
+            <input name="email" type="email" placeholder="Email" required>
+            <button type="submit">Send</button>
+        </form>
     </div>
 <script>
 
@@ -149,12 +152,14 @@ function playRound() {
             gamePlay();
         }
     } else {
-      var fso, f;
-      fso = new ActiveXObject("Scripting.FileSystemObject");
-      f = fso.OpenTextFile("results.txt", 8, true);
-      f.Write("all done" + idVal + finalScores);
-      f.Close();
-      alert("all done" + idVal + finalScores);
+      const scriptURL = '<SCRIPT URL>'
+      const form = document.forms['submit-to-google-sheet']
+      form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+              .then(response => console.log('Success!', response))
+              .catch(error => console.error('Error!', error.message))
+  })
     }  
 }
 

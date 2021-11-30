@@ -45,6 +45,8 @@
 
 
 let moneyVals = [10, 25, 50];
+let finalScores = [0, 0, 0];
+let finalScores = [];
 let curMoneyVal = 0;
 let score = 0;
 let threshold = 1;
@@ -148,9 +150,13 @@ function playRound() {
             gamePlay();
         }
     } else {
-      alert("all done");
-    }
-    
+      var fso, f;
+      fso = new ActiveXObject("Scripting.FileSystemObject");
+      f = fso.OpenTextFile("results.txt", 8, true);
+      f.Write(idVal + " " + finalScores + "\n");
+      f.Close();
+      alert("all done" + idVal + finalScores);
+    }  
 }
 
 function getRandomInt() {

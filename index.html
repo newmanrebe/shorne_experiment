@@ -37,7 +37,7 @@
             <input type="submit" id="cont" value="Continue" class="cont">
         </form>
     </div>
-    <div id="endroundbutton">
+    <div id="endroundbutton" style="display:none">
         <form name="submit-to-google-sheet">
             <input name="email" type="email" placeholder="Email" required>
             <button type="submit">Send</button>
@@ -63,6 +63,8 @@ const idForm = document.getElementById("idvalue");
 const idInput = document.querySelector('#idField');
 const nextVal = document.querySelector('.nextMonetaryVal');
 const thresholdVal = document.querySelector('.thresholdVal');
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwZSUVcZcVZuDlCRiA9uCUq6DhgxwNsERvKQfTIGFlOQkV7VjaDoLh0cAtdhqDh1H9I9g/exec';
+const form = document.forms['submit-to-google-sheet'];
 
   
 let idVal = 0;
@@ -152,8 +154,7 @@ function playRound() {
             gamePlay();
         }
     } else {
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbwZSUVcZcVZuDlCRiA9uCUq6DhgxwNsERvKQfTIGFlOQkV7VjaDoLh0cAtdhqDh1H9I9g/exec'
-      const form = document.forms['submit-to-google-sheet']
+      endroundbutton.style.display = "block";
       form.addEventListener('submit', e => {
           e.preventDefault()
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})

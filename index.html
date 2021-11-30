@@ -150,11 +150,6 @@ function playRound() {
             gamePlay();
         }
     } else {
-      var fso, f;
-      fso = new ActiveXObject("Scripting.FileSystemObject");
-      f = fso.OpenTextFile("results.txt", 8, true);
-      f.Write(idVal + " " + finalScores + "\n");
-      f.Close();
       alert("all done" + idVal + finalScores);
     }  
 }

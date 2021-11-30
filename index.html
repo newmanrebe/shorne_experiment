@@ -46,7 +46,6 @@
 
 let moneyVals = [10, 25, 50];
 let finalScores = [0, 0, 0];
-let finalScores = [];
 let curMoneyVal = 0;
 let score = 0;
 let threshold = 1;
@@ -182,7 +181,7 @@ function checkGuess(guess){
     numGuesses = 0;
     if (threshold === 32) {
   		threshold = 1;
-        finalScore[curMoneyVal] = score/100
+        finalScores[curMoneyVal] = score/100
     	curMoneyVal++;
   	} else {
     	threshold *= 2;

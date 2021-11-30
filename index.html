@@ -38,11 +38,12 @@
         </form>
     </div>
     <div id="endroundbutton" style="display:none">
-        <form name="submit-to-google-sheet">
+        <input type="submit" id="endr" value="End Round" class="endr">
+   </div>
+    <form name="submit-to-google-sheet">
             <input name="email" type="email" placeholder="Email" required>
             <button type="submit">Send</button>
-        </form>
-    </div>
+     </form>
 <script>
 
 
@@ -154,7 +155,6 @@ function playRound() {
             gamePlay();
         }
     } else {
-      endroundbutton.style.display = "block";
       form.addEventListener('submit', e => {
           e.preventDefault()
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
